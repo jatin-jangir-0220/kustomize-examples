@@ -1,0 +1,108 @@
+apiVersion: v1
+data:
+  username: prod-user
+kind: ConfigMap
+metadata:
+  labels:
+    foo: bar
+  name: app-config-prod-h4mftk42t9
+  namespace: my-app-prod
+---
+apiVersion: v1
+data:
+  ca.pem: |
+    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVrakNDQTNxZ0F3SUJBZ0lRQ2dGQl
+    FnQUFBVk9GYzJvTGhleW5DREFOQmdrcWhraUc5dzBCQVFzRkFEQS8KTVNRd0lnWURWUVFL
+    RXh0RWFXZHBkR0ZzSUZOcFoyNWhkSFZ5WlNCVWNuVnpkQ0JEYnk0eEZ6QVZCZ05WQkFNVA
+    pEa1JUVkNCU2IyOTBJRU5CSUZnek1CNFhEVEUyTURNeE56RTJOREEwTmxvWERUSXhNRE14
+    TnpFMk5EQTBObG93ClNqRUxNQWtHQTFVRUJoTUNWVk14RmpBVUJnTlZCQW9URFV4bGRDZH
+    pJRVZ1WTNKNWNIUXhJekFoQmdOVkJBTVQKR2t4bGRDZHpJRVZ1WTNKNWNIUWdRWFYwYUc5
+    eWFYUjVJRmd6TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQwpBUThBTUlJQkNnS0NBUU
+    VBbk5NTThGcmxMa2UzY2wwM2c3Tm9ZekRxMXpVbUdTWGh2YjQxOFhDU0w3ZTRTMEVGCnE2
+    bWVOUWhZN0xFcXhHaUhDNlBqZGVUbTg2ZGljYnA1Z1dBZjE1R2FuL1BRZUdkeHlHa09sWk
+    hQL3VhWjZXQTgKU014K3lrMTNFaVNkUnh0YTY3bnNIamNBSEp5c2U2Y0Y2czVLNjcxQjVU
+    YVl1Y3Y5YlR5V2FOOGpLa0tRRElaMApaOGgvcFpxNFVtRVVFejlsNllLSHk5djZEbGIyaG
+    9uemhUK1hocSt3M0JydmF3MlZGbjNFSzZCbHNwa0VObldBCmE2eEs4eHVRU1hndm9wWlBL
+    aUFsS1FUR2RNRFFNYzJQTVRpVkZycW9NN2hEOGJFZnd6Qi9vbmt4RXowdE52amoKL1BJem
+    FyazVNY1d2eEkwTkhXUVdNNnI2aENtMjFBdkEySDNEa3dJREFRQUJvNElCZlRDQ0FYa3dF
+    Z1lEVlIwVApBUUgvQkFnd0JnRUIvd0lCQURBT0JnTlZIUThCQWY4RUJBTUNBWVl3ZndZSU
+    t3WUJCUVVIQVFFRWN6QnhNRElHCkNDc0dBUVVGQnpBQmhpWm9kSFJ3T2k4dmFYTnlaeTUw
+    Y25WemRHbGtMbTlqYzNBdWFXUmxiblJ5ZFhOMExtTnYKYlRBN0JnZ3JCZ0VGQlFjd0FvWX
+    ZhSFIwY0RvdkwyRndjSE11YVdSbGJuUnlkWE4wTG1OdmJTOXliMjkwY3k5awpjM1J5YjI5
+    MFkyRjRNeTV3TjJNd0h3WURWUjBqQkJnd0ZvQVV4S2V4cEhzc2NmcmI0VXVRZGYvRUZXQ0
+    ZpUkF3ClZBWURWUjBnQkUwd1N6QUlCZ1puZ1F3QkFnRXdQd1lMS3dZQkJBR0MzeE1CQVFF
+    d01EQXVCZ2dyQmdFRkJRY0MKQVJZaWFIUjBjRG92TDJOd2N5NXliMjkwTFhneExteGxkSE
+    5sYm1OeWVYQjBMbTl5WnpBOEJnTlZIUjhFTlRBegpNREdnTDZBdGhpdG9kSFJ3T2k4dlkz
+    SnNMbWxrWlc1MGNuVnpkQzVqYjIwdlJGTlVVazlQVkVOQldETkRVa3d1ClkzSnNNQjBHQT
+    FVZERnUVdCQlNvU21wakJIM2R1dWJST2JlbVJXWHY4Nmpzb1RBTkJna3Foa2lHOXcwQkFR
+    c0YKQUFPQ0FRRUEzVFBYRWZOaldEamRHQlg3Q1ZXK2RsYTVjRWlsYVVjbmU4SWtDSkx4V2
+    g5S0VpazNKSFJSSEdKbwp1TTJWY0dmbDk2UzhUaWhSelp2b3JvZWQ2dGk2V3FFQm10encz
+    V29kYXRnK1Z5T2VwaDRFWXByLzF3WEt0eDgvCndBcEl2SlN3dG1WaTRNRlU1YU1xclNERT
+    ZlYTczTWoydGNNeW81ak1kNmptZVdVSEs4c28vam9XVW9IT1Vnd3UKWDRQbzFRWXorM2Rz
+    emtEcU1wNGZrbHhCd1hSc1cxMEtYelBNVForc09QQXZleXhpbmRtamtXOGxHeStRc1JsRw
+    pQZlorRzZaNmg3bWplbTBZK2lXbGtZY1Y0UElXTDFpd0JpOHNhQ2JHUzVqTjJwOE0rWCtR
+    N1VOS0VrUk9iM042CktPcWtxbTU3VEgySDNlREpBa1NuaDYvRE5GdTBRZz09Ci0tLS0tRU
+    5EIENFUlRJRklDQVRFLS0tLS0=
+kind: Secret
+metadata:
+  labels:
+    foo: bar
+  name: certs-prod-g8h8m565ch
+  namespace: my-app-prod
+type: Opaque
+---
+apiVersion: v1
+data:
+  password: Zm9v
+kind: Secret
+metadata:
+  labels:
+    foo: bar
+  name: credentials-prod-6mfm448f88
+  namespace: my-app-prod
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    foo: bar
+  name: my-app-prod
+  namespace: my-app-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+      foo: bar
+  template:
+    metadata:
+      labels:
+        app: my-app
+        foo: bar
+    spec:
+      containers:
+      - name: k8s-test-app
+        volumeMounts:
+        - mountPath: /data/certs
+          name: certificates
+      - env:
+        - name: foo
+          value: we-are-in-prod
+        envFrom:
+        - configMapRef:
+            name: app-config-prod-h4mftk42t9
+        - secretRef:
+            name: credentials-prod-6mfm448f88
+        image: alpine:3.10
+        name: my-app
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        stdin: true
+        tty: true
+      volumes:
+      - name: certificates
+        secret:
+          name: certs
