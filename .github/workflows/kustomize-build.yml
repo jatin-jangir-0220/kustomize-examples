@@ -36,28 +36,19 @@ jobs:
         git config --local user.email "jatinjangir0220@gmail.com"
         git config --local user.name "jatin-jangir"
 
-    - name: Create and push tags
-      run: |
-        tag="pr-${PR_NAME// /_}"  # Replace spaces with underscores
-        git tag "$tag" -m "Tag for PR #${PR_NUMBER}"
-        git push origin "$tag"
 
     - name: Generate kustomize outputs for overlays
       run: |
         for overlay in overlays/*; do
-          overlay_name=$(basename "$overlay")
-          output_folder="testPR/$overlay_name"
-          mkdir -p "$output_folder"
-          kustomize build "$overlay" > "$output_folder/kustomize_output.yaml"
-          git add "$output_folder/kustomize_output.yaml"
+          overlay_name=$(basename '$overlay')
+          output_folder='testPR/$overlay_name'
+          mkdir -p '$output_folder'
+          kustomize build '$overlay' > '$output_folder/kustomize_output.yaml'
+          git add '$output_folder/kustomize_output.yaml'
         done
-
-    - name: Display staged changes
-      run: git status
-
-    - name: Commit and push changes
+    - name: Commit changes to tag
       run: |
-        git config --local user.email "jatinjangir0220@gmail.com"
-        git config --local user.name "jatin-jangir"
         git commit -m "Update kustomize outputs for overlays" || true  # Ignore if there are no changes
-        git push origin HEAD:main  # Change 'main' to your branch name
+        tag='pr-${PR_NAME// /_}'  # Replace spaces with underscores
+        git tag '$tag' -m 'Tag for PR #${PR_NUMBER}'
+        git push origin "$tag"
