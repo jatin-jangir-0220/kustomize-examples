@@ -1,0 +1,49 @@
+apiVersion: v1
+data:
+  username: demo-user
+kind: ConfigMap
+metadata:
+  name: app-config-dev-m8mmbmmk9h
+  namespace: my-app-dev
+---
+apiVersion: v1
+data:
+  password: ZGVtbw==
+kind: Secret
+metadata:
+  name: credentials-dev-24f844b6g2
+  namespace: my-app-dev
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-dev
+  namespace: my-app-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - env:
+        - name: foo
+          value: we-are-in-dev
+        envFrom:
+        - configMapRef:
+            name: app-config-dev-m8mmbmmk9h
+        - secretRef:
+            name: credentials-dev-24f844b6g2
+        image: alpine:3.10
+        name: my-app
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        stdin: true
+        tty: true

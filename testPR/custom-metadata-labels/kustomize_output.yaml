@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    mySpecialLabel: mySpecialValue
+  name: my-app
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: my-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    mySpecialLabel: mySpecialValue
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - env:
+        - name: foo
+          value: bar
+        image: alpine:3.10
+        name: my-app
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        stdin: true
+        tty: true
