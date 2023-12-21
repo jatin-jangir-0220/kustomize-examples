@@ -1,33 +1,49 @@
-name: Kustomize Build
+name: Tag and Release
 
 on:
   push:
     branches:
-      - master  # Change this to your main branch name
+      - master
 
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  tag_and_release:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up kustomize
-        run: |
-          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
-          sudo mv kustomize /usr/local/bin/
-  
-      - name: Kustomize build and save to file
-        run: kustomize build base/ > kustomize_output.yaml
-  
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "jatinjangir0220@gmail.com"
-          git config --local user.name "jatin-jangir"
-          git add kustomize_output.yaml
-          git commit -m "Update kustomize output"
-          git push origin HEAD:kustomize 
+    - name: Set up kustomize
+      run: |
+        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+        sudo mv kustomize /usr/local/bin/
+
+    - name: Get PR number
+      id: pr
+      run: echo "::set-output name=pr_number::$(echo $GITHUB_REF | awk -F'/' '{print $3}')"
+
+    - name: Create and push tags
+      run: |
+        tag="pr-${{ steps.pr.outputs.pr_number }}"
+        git tag "$tag" -m "Tag for PR #${{ steps.pr.outputs.pr_number }}"
+        git push origin "$tag"
+
+    - name: Generate kustomize outputs for overlays
+      run: |
+        for overlay in overlays/*; do
+          overlay_name=$(basename "$overlay")
+          output_folder="testPR/$overlay_name"
+          mkdir -p "$output_folder"
+          kustomize build "$overlay" > "$output_folder/kustomize_output.yaml"
+          git add "$output_folder/kustomize_output.yaml"
+        done
+
+    - name: Display staged changes
+      run: git status
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Update kustomize outputs for overlays" || true  # Ignore if there are no changes
+        git push origin HEAD:main  # Change 'main' to your branch name
