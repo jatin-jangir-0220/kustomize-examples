@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Git
+    - name: Set up Git with user info
       run: |
-        git config user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
-        git config user.name "${{ secrets.GITHUB_ACTOR }}"
+        git config user.email "jatinjangir0220@gmail.com"
+        git config user.name "jatin-jangir"
         git fetch --tags
 
     - name: Create Release Tag
