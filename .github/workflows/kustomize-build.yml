@@ -1,9 +1,9 @@
 name: Tag and Release
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types:
+      - closed
 
 jobs:
   tag_and_release:
@@ -43,7 +43,7 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "jatinjangir0220@gmail.com"
+        git config --local user.name "jatin-jangir"
         git commit -m "Update kustomize outputs for overlays" || true  # Ignore if there are no changes
         git push origin HEAD:main  # Change 'main' to your branch name
