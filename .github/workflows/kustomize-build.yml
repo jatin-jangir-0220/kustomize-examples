@@ -18,10 +18,18 @@ jobs:
         curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
         sudo mv kustomize /usr/local/bin/
 
-    - name: Get PR information
+    - name: Get PR information and check if it's targeting the main branch
       id: pr
-      run: echo "PR_NUMBER=$(echo $GITHUB_REF | awk -F'/' '{print $3}')" >> $GITHUB_ENV && echo "PR_NAME=$(gh pr view $PR_NUMBER --json title -q .title)" >> $GITHUB_ENV
-
+      run: |
+        PR_NUMBER=$(echo $GITHUB_REF | awk -F'/' '{print $3}')
+        PR_BASE_BRANCH=$(gh pr view $PR_NUMBER --json base_ref -q .base_ref)
+        if [ "$PR_BASE_BRANCH" != "main" ]; then
+          echo "This PR is not targeting the main branch. Exiting."
+          exit 0
+        fi
+        PR_NAME=$(gh pr view $PR_NUMBER --json title -q .title)
+        echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+        echo "PR_NAME=$PR_NAME" >> $GITHUB_ENV
     
     - name: Set Git user identity
       run: |
